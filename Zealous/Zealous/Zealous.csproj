@@ -214,7 +214,16 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Zealous.DAL\Zealous.DAL.csproj">
+      <Project>{db75edc5-0b1d-4848-a0c8-c9cd977027da}</Project>
+      <Name>Zealous.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zealous.Models\Zealous.Models.csproj">
+      <Project>{3871241e-1b3f-4e15-b210-d73e36424f67}</Project>
+      <Name>Zealous.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
