@@ -219,6 +219,10 @@
       <Project>{db75edc5-0b1d-4848-a0c8-c9cd977027da}</Project>
       <Name>Zealous.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zealous.Interfaces\Zealous.Interfaces.csproj">
+      <Project>{cc329408-6d93-4a12-bde9-b06959d566bc}</Project>
+      <Name>Zealous.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zealous.Models\Zealous.Models.csproj">
       <Project>{3871241e-1b3f-4e15-b210-d73e36424f67}</Project>
       <Name>Zealous.Models</Name>

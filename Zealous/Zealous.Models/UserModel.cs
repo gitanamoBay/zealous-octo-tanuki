@@ -23,7 +23,7 @@ namespace Zealous.Models
         [JsonIgnore]
         public List<IPet> Pets
         {
-            get { return DataBase.GetPets(ID);  } }
+            get { return DataBase.GetPets(ID);   }
         } 
     }
 }
