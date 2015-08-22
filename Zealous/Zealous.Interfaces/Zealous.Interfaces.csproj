@@ -41,8 +41,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDAL.cs" />
+    <Compile Include="IDBModel.cs" />
+    <Compile Include="IMap.cs" />
+    <Compile Include="IMapperSet.cs" />
+    <Compile Include="IModel.cs" />
     <Compile Include="IPet.cs" />
+    <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zealous.Enums\Zealous.Enums.csproj">
+      <Project>{573268f3-4e74-4d53-8eed-8bb23b933fdb}</Project>
+      <Name>Zealous.Enums</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

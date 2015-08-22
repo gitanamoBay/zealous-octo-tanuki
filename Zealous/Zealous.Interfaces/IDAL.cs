@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace Zealous.Interfaces
 {
-    public interface IDal
+    public interface IDal:IDisposable
     {
-        List<IPet> GetPets();
-        List<IPet> GetPets(Guid ownerId);
+        IList<IPet> GetPets();
+        IList<IPet> GetPets(Guid ownerId);
+        void SetPets(Guid ownerId, IList<IPet> newPets);
     }
 }

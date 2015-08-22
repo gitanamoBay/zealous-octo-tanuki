@@ -1,8 +1,10 @@
 ﻿using System;
+using Zealous.Interfaces;
+using Zealous.Enums;
 
 namespace Zealous.Models
 {
-    public class PetModel
+    public class PetModel:IPet,IModel
     {
         public Guid ID { get; set; }
         public Guid OwnerID { get; set; }

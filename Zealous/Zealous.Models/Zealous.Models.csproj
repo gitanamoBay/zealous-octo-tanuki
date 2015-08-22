@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PetModel.cs" />
-    <Compile Include="PetType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
@@ -53,6 +52,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zealous.Enums\Zealous.Enums.csproj">
+      <Project>{573268f3-4e74-4d53-8eed-8bb23b933fdb}</Project>
+      <Name>Zealous.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zealous.Interfaces\Zealous.Interfaces.csproj">
       <Project>{cc329408-6d93-4a12-bde9-b06959d566bc}</Project>
       <Name>Zealous.Interfaces</Name>

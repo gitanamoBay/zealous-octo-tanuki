@@ -18,7 +18,7 @@ namespace Zealous.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            return new Zealous.Domain.Pets().GetPets(id);
         }
 
         // POST api/values
