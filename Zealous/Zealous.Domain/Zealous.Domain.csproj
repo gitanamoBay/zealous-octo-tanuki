@@ -60,6 +60,10 @@
       <Project>{cc329408-6d93-4a12-bde9-b06959d566bc}</Project>
       <Name>Zealous.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zealous.Mappers\Zealous.ProtoMappers.csproj">
+      <Project>{18d39b74-7660-48ec-950c-8a4d83981396}</Project>
+      <Name>Zealous.ProtoMappers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zealous.Models\Zealous.Models.csproj">
       <Project>{3871241e-1b3f-4e15-b210-d73e36424f67}</Project>
       <Name>Zealous.Models</Name>

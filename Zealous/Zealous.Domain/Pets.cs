@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Zealous.DAL;
 using Zealous.Interfaces;
 using Newtonsoft.Json;
+using Zealous.Mappers;
+using Zealous.Models;
+using Zealous.ProtoDAL;
 
 namespace Zealous.Domain
 {
@@ -17,11 +20,21 @@ namespace Zealous.Domain
 
             using (IDal dal = new ProtoDBContext())
             {
-                var data = dal.GetPets();
+                var data = dal.GetPets().ToList();
 
-                petJson = JsonConvert.SerializeObject(data);
+                List<IModel> pets = new List<IModel>();
+
+                var mapper = new ProtoPetMap();
+
+                foreach (var pet in data)
+                {
+                    var petModel = mapper.Map(pet as IDBModel);
+
+                    pets.Add(petModel);
+                }
+
+                petJson = JsonConvert.SerializeObject(pets);
             }
-
 
             return petJson;
         }

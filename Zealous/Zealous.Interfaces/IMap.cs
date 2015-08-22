@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Zealous.Interfaces
 {
-    public interface IMap
+    public interface IMap<T,T2>
     {
         IModel Map(IDBModel dbModel);
         IDBModel Map(IModel model);
+
+        bool Applicable(IDBModel model);
+        bool Applicable(IModel model);
     }
 }

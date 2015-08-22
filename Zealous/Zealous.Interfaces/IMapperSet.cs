@@ -8,6 +8,6 @@ namespace Zealous.Interfaces
 {
     public interface IMapperSet
     {
-         IList<IMap> Maps { get; set; }
+         IList<IMap<object,object>> Maps { get; set; }
     }
 }
