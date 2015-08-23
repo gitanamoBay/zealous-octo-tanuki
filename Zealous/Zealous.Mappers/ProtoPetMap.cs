@@ -6,7 +6,7 @@ using Zealous.ProtoDAL;
 
 namespace Zealous.Mappers
 {
-    public class ProtoPetMap : IMap<PetModel, ProtoPetModel>
+    public class ProtoPetMap : IMap
     {
         public bool Applicable(IDBModel model)
         {
@@ -28,12 +28,36 @@ namespace Zealous.Mappers
             return new PetModel
             {
                 Name = proto.Name,
+                ID = proto.ID,
+                OwnerID = proto.OwnerID,
+                Happiness =  proto.Happiness,
+                Hunger = proto.Hunger,
+                Type = proto.Type,
+                DateLastChecked = proto.DateLastChecked,
+                HappinessDecay = proto.HappinessDecay,
+                HungerDecay = proto.HungerDecay
             };
         }
 
         public IDBModel Map(IModel model)
         {
-            return new ProtoPetModel();
+            var petModel = model as PetModel;
+
+            if (petModel == null)
+                return null;
+
+            return new ProtoPetModel
+            {
+                Name = petModel.Name,
+                ID = petModel.ID,
+                OwnerID = petModel.OwnerID,
+                Happiness = petModel.Happiness,
+                Hunger = petModel.Hunger,
+                Type = petModel.Type,
+                DateLastChecked = petModel.DateLastChecked,
+                HappinessDecay = petModel.HappinessDecay,
+                HungerDecay = petModel.HungerDecay
+            };
         }
     }
 }

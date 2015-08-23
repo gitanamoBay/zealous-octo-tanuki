@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zealous.DAL;
 using Zealous.Interfaces;
 using Newtonsoft.Json;
 using Zealous.Mappers;
-using Zealous.Models;
-using Zealous.ProtoDAL;
 
 namespace Zealous.Domain
 {

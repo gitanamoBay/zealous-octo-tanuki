@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zealous.Interfaces;
 
 namespace Zealous.DAL
@@ -22,10 +19,8 @@ namespace Zealous.DAL
         public void SetPets(Guid ownwerId, IList<IPet> newPets)
         {
         }
-    
 
-
-    public void Dispose()
+        public void Dispose()
         {
         }
     }
