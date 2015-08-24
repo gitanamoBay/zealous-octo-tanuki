@@ -16,9 +16,9 @@ namespace Zealous.Controllers
 
         public string Get(string id)
         {
-            Guid empty = Guid.Empty;
-            if(Guid.TryParse(id, out empty))
-                return new Zealous.Domain.Users().GetUsers();
+            Guid guid = Guid.Empty;
+            if(Guid.TryParse(id, out guid))
+                return new Zealous.Domain.Users().GetUser(guid);
 
             return new HttpError("User not found.").ToString();
         }

@@ -10,10 +10,10 @@ namespace Zealous.ProtoDAL
     {
         public ProtoUserModel(IDal dB)
         {
-            DataBase = dB;  
+            Dal = dB;  
         }
 
-        public IDal DataBase { get; set; }
+        public IDal Dal { get; set; }
         public Guid ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -21,7 +21,7 @@ namespace Zealous.ProtoDAL
         [JsonIgnore]
         public List<IPet> Pets
         {
-            get { return DataBase.GetPetsByUserId(ID).ToList(); }
+            get { return Dal.GetPetsByUserId(ID).ToList(); }
             set {  }
         } 
     }

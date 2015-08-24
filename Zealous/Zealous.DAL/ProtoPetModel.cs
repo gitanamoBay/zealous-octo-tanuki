@@ -6,6 +6,7 @@ namespace Zealous.ProtoDAL
 {
     public class ProtoPetModel:IPet,IDBModel
     {
+        public IDal Dal { get; set; }
         public Guid ID { get; set; }
         public Guid OwnerID { get; set; }
         public string Name { get; set; }

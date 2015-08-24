@@ -23,7 +23,7 @@ namespace Zealous.DAL
             var collections = new ProtoDBCollections();
 
             var user = collections.Users.SingleOrDefault(x => x.Username == username);
-
+            
             if (user == null)
                 return null;
 

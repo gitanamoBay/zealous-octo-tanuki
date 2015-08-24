@@ -6,6 +6,13 @@ namespace Zealous.Mappers
 {
     public class ProtoPetMap : IMap
     {
+        public ProtoPetMap(IDal dal)
+        {
+            Dal = dal;
+        }
+
+        public IDal Dal { get; set; }
+
         public bool Applicable(IDBModel model)
         {
             return model is ProtoPetModel;
@@ -19,6 +26,8 @@ namespace Zealous.Mappers
         public IModel Map(IDBModel model)
         {
             var proto = model as ProtoPetModel;
+
+            proto.Dal = Dal;
 
             if (proto == null)
                 return null;

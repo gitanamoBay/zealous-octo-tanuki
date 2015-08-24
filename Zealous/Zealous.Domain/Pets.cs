@@ -20,7 +20,7 @@ namespace Zealous.Domain
 
                 List<IModel> pets = new List<IModel>();
 
-                var mapper = new ProtoPetMap();
+                var mapper = new ProtoPetMap(dal);
 
                 foreach (var pet in data)
                 {
@@ -45,7 +45,7 @@ namespace Zealous.Domain
 
                 List<IModel> pets = new List<IModel>();
 
-                var mapper = new ProtoPetMap();
+                var mapper = new ProtoPetMap(dal);
 
                 foreach (var pet in data)
                 {
