@@ -11,6 +11,6 @@ namespace Zealous.Interfaces
         float Happiness { get; set; }
         float Hunger { get; set; }
         PetType Type { get; set; }
-        DateTime DateLastChecked { get; set; }
+        DateTime LastChangeDate { get; set; }
     }
 }

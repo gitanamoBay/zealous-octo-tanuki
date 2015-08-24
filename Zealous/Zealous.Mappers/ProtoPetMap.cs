@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Zealous.Interfaces;
+﻿using Zealous.Interfaces;
 using Zealous.Models;
 using Zealous.ProtoDAL;
 
@@ -33,7 +31,7 @@ namespace Zealous.Mappers
                 Happiness =  proto.Happiness,
                 Hunger = proto.Hunger,
                 Type = proto.Type,
-                DateLastChecked = proto.DateLastChecked,
+                LastChangeDate = proto.LastChangeDate,
                 HappinessDecay = proto.HappinessDecay,
                 HungerDecay = proto.HungerDecay
             };
@@ -54,7 +52,7 @@ namespace Zealous.Mappers
                 Happiness = petModel.Happiness,
                 Hunger = petModel.Hunger,
                 Type = petModel.Type,
-                DateLastChecked = petModel.DateLastChecked,
+                LastChangeDate = petModel.LastChangeDate,
                 HappinessDecay = petModel.HappinessDecay,
                 HungerDecay = petModel.HungerDecay
             };

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="IDAL.cs" />
     <Compile Include="IDBModel.cs" />
+    <Compile Include="IDBSet.cs" />
     <Compile Include="IMap.cs" />
     <Compile Include="IMapperSet.cs" />
     <Compile Include="IModel.cs" />

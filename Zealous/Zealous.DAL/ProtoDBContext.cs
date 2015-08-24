@@ -1,23 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Zealous.Interfaces;
 
 namespace Zealous.DAL
 {
     public class ProtoDBContext : IDal
     {
-        public IList<IPet> GetPets()
+
+        public IEnumerable<IPet> GetPets()
         {
-            return new List<IPet>();
+            return new ProtoDBCollections().Pets;
         }
 
-        public IList<IPet> GetPets(Guid ownerId)
+        public IEnumerable<IPet> GetPetsByUserId(Guid ownerId)
         {
-            return new List<IPet>();
+            return new ProtoDBCollections().Pets.Where(x=>x.OwnerID == ownerId);
         }
 
-        public void SetPets(Guid ownwerId, IList<IPet> newPets)
+        public IEnumerable<IPet> GetPetsByUsername(string username)
         {
+            var collections = new ProtoDBCollections();
+
+            var user = collections.Users.SingleOrDefault(x => x.Username == username);
+
+            if (user == null)
+                return null;
+
+            return collections.Pets.Where(x=> x.OwnerID == user.ID);
+        }
+
+        public IEnumerable<IUser> GetUsers()
+        {
+            return new ProtoDBCollections().Users;
+        }
+
+        public IUser GetUserById(Guid id)
+        {
+            return GetUsers().SingleOrDefault(x=>x.ID == id);
+        }
+
+        public IUser GetUserByName(string username)
+        {
+            return GetUsers().SingleOrDefault(x => x.Username == username);
         }
 
         public void Dispose()

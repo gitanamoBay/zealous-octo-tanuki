@@ -21,8 +21,8 @@ namespace Zealous.ProtoDAL
         [JsonIgnore]
         public List<IPet> Pets
         {
-            get { return DataBase.GetPets(ID).ToList(); }
-            set { DataBase.SetPets(ID, value); }
+            get { return DataBase.GetPetsByUserId(ID).ToList(); }
+            set {  }
         } 
     }
 }

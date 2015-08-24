@@ -5,8 +5,11 @@ namespace Zealous.Interfaces
 {
     public interface IDal:IDisposable
     {
-        IList<IPet> GetPets();
-        IList<IPet> GetPets(Guid ownerId);
-        void SetPets(Guid ownerId, IList<IPet> newPets);
+        IEnumerable<IPet> GetPets();
+        IEnumerable<IPet> GetPetsByUserId(Guid ownerId);
+        IEnumerable<IPet> GetPetsByUsername(string Username);
+        IEnumerable<IUser> GetUsers();
+        IUser GetUserById(Guid id);
+        IUser GetUserByName(string username);
     }
 }

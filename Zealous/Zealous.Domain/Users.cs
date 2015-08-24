@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Zealous.DAL;
 using Zealous.Interfaces;
-using Newtonsoft.Json;
 using Zealous.Mappers;
 
 namespace Zealous.Domain
 {
-    public class Pets
+    public class Users
     {
-        public string GetPets(Guid id)
+        public string GetUsers(Guid id)
         {
             string petJson;
 
@@ -35,7 +37,7 @@ namespace Zealous.Domain
             return petJson;
         }
 
-        public string GetPets()
+        public string GetUsers()
         {
             string petJson;
 
