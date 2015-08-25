@@ -45,6 +45,16 @@ namespace Zealous.DAL
             return GetUsers().SingleOrDefault(x => x.Username == username);
         }
 
+        public bool AddPet(IPet pet)
+        {
+            return new ProtoDBCollections().AddPet(pet);
+        }
+
+        public bool AddUser(IUser user)
+        {
+            return new ProtoDBCollections().AddUser(user);
+        }
+
         public void Dispose()
         {
         }

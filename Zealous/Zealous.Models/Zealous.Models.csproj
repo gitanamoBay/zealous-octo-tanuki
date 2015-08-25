@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,11 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zealous.Enums\Zealous.Enums.csproj">
-      <Project>{573268f3-4e74-4d53-8eed-8bb23b933fdb}</Project>
+      <Project>{573268F3-4E74-4D53-8EED-8BB23B933FDB}</Project>
       <Name>Zealous.Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zealous.Interfaces\Zealous.Interfaces.csproj">
-      <Project>{cc329408-6d93-4a12-bde9-b06959d566bc}</Project>
+      <Project>{CC329408-6D93-4A12-BDE9-B06959D566BC}</Project>
       <Name>Zealous.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>

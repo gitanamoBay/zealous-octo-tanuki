@@ -10,5 +10,11 @@ namespace Zealous.Interfaces
     {
         IEnumerable<IPet> Pets { get; }
         IEnumerable<IUser> Users { get; }
+
+        bool AddPet(IPet pet);
+        bool AddUser(IUser user);
+
+        bool UpdatePet(IPet pet);
+        bool UpdateUser(IUser user);
     }
 }

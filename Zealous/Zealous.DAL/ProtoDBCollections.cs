@@ -36,6 +36,81 @@ namespace Zealous.DAL
             }
         }
 
+        public bool AddPet(IPet pet)
+        {
+            var dbModel = pet as ProtoPetModel;
+
+            if (dbModel == null)
+                return false;
+
+            lock (petLock)
+            {
+                petList.Add(dbModel);
+            }
+            return true;
+        }
+
+        public bool AddUser(IUser user)
+        {
+            var dbModel = petList as ProtoUserModel;
+
+            if (dbModel == null)
+                return false;
+
+            lock (userLock)
+            {
+                userList.Add(dbModel);
+            }
+
+            return true;
+        }
+
+        public bool UpdatePet(IPet pet)
+        {
+            var dbModel = pet as ProtoPetModel;
+
+            if (dbModel == null)
+                return false;
+
+            lock (petLock)
+            {
+                var existingModel = petList.SingleOrDefault(x => x.ID == dbModel.ID);
+
+                if (existingModel == null)
+                {
+                    return false;
+                }
+
+
+                existingModel.CopyMutableValues(dbModel);
+               
+
+                return true;
+            }
+        }
+
+        public bool UpdateUser(IUser user)
+        {
+            var dbModel = user as ProtoUserModel;
+
+            if (dbModel == null)
+                return false;
+
+            lock (userLock)
+            {
+                var existingModel = userList.SingleOrDefault(x => x.ID == dbModel);
+
+                if (existingModel == null)
+                {
+                    return false;
+                }
+
+                existingModel.CopyMutableValues(dbModel);
+
+                return true;
+            }
+        }
+
         static ProtoDBCollections()
         {
             petList = new List<ProtoPetModel>();

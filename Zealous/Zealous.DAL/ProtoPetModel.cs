@@ -16,5 +16,15 @@ namespace Zealous.ProtoDAL
         public DateTime LastChangeDate { get; set; }
         public float HappinessDecay { get; set; }
         public float HungerDecay { get; set; }
+
+        public void CopyMutableValues(ProtoPetModel newValues)
+        {
+            Name = newValues.Name;
+            Happiness = newValues.Happiness;
+            Hunger = newValues.Hunger;
+            LastChangeDate = newValues.LastChangeDate;
+            HappinessDecay = newValues.HappinessDecay;
+            HungerDecay = newValues.HungerDecay;
+        }
     }
 }

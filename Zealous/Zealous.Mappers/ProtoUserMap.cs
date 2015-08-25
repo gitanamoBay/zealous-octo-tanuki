@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Zealous.Interfaces;
+﻿using Zealous.Interfaces;
 using Zealous.Models;
 using Zealous.ProtoDAL;
 
@@ -36,6 +31,8 @@ namespace Zealous.Mappers
 
             if (proto == null)
                 return null;
+
+
 
             return new UserModel
             {

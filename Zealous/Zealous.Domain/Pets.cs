@@ -5,6 +5,7 @@ using Zealous.DAL;
 using Zealous.Interfaces;
 using Newtonsoft.Json;
 using Zealous.Mappers;
+using Zealous.ProtoDAL;
 
 namespace Zealous.Domain
 {
@@ -58,6 +59,18 @@ namespace Zealous.Domain
             }
 
             return petJson;
+        }
+
+        public bool AddPet(IPet pet)
+        {
+            using (IDal dal = new ProtoDBContext())
+            {
+                var mapper = new ProtoPetMap(dal);
+
+                var dbmodel = mapper.Map(pet as IModel);
+
+                return dal.AddPet(dbmodel as ProtoPetModel);
+            }
         }
     }
 }

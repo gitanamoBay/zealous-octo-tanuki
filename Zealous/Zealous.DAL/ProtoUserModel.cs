@@ -23,6 +23,11 @@ namespace Zealous.ProtoDAL
         {
             get { return Dal.GetPetsByUserId(ID).ToList(); }
             set {  }
-        } 
+        }
+
+        public void CopyMutableValues(ProtoUserModel model)
+        {
+            Password = model.Password;
+        }
     }
 }

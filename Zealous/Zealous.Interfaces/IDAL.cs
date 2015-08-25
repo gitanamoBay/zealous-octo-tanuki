@@ -11,5 +11,7 @@ namespace Zealous.Interfaces
         IEnumerable<IUser> GetUsers();
         IUser GetUserById(Guid id);
         IUser GetUserByName(string username);
+
+        bool AddPet(IPet pet);
     }
 }
