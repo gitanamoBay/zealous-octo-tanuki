@@ -72,5 +72,18 @@ namespace Zealous.Domain
                 return dal.AddPet(dbmodel as ProtoPetModel);
             }
         }
+
+        public bool UpdatePet(IPet pet)
+        {
+            using (IDal dal = new ProtoDBContext())
+            {
+                var mapper = new ProtoPetMap(dal);
+
+                var dbModel = mapper.Map(pet as IModel);
+
+                throw new NotImplementedException();
+            }
+        }
+
     }
 }

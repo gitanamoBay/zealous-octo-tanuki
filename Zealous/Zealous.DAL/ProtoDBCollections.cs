@@ -52,7 +52,7 @@ namespace Zealous.DAL
 
         public bool AddUser(IUser user)
         {
-            var dbModel = petList as ProtoUserModel;
+            var dbModel = user as ProtoUserModel;
 
             if (dbModel == null)
                 return false;
@@ -98,7 +98,7 @@ namespace Zealous.DAL
 
             lock (userLock)
             {
-                var existingModel = userList.SingleOrDefault(x => x.ID == dbModel);
+                var existingModel = userList.SingleOrDefault(x => x.ID == dbModel.ID);
 
                 if (existingModel == null)
                 {
