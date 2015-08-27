@@ -5,15 +5,15 @@ using Zealous.DAL;
 using Zealous.Interfaces;
 using Newtonsoft.Json;
 using Zealous.Mappers;
+using Zealous.Models;
 using Zealous.ProtoDAL;
 
 namespace Zealous.Domain
 {
     public class Pets
     {
-        public string GetPets(Guid id)
+        public IEnumerable<IModel> GetPets(Guid id)
         {
-            string petJson;
 
             using (IDal dal = new ProtoDBContext())
             {
@@ -30,16 +30,14 @@ namespace Zealous.Domain
                     pets.Add(petModel);
                 }
 
-                petJson = JsonConvert.SerializeObject(pets);
+                return pets;
             }
 
-            return petJson;
+            return null;
         }
 
-        public string GetPets()
+        public IEnumerable<IModel> GetPets()
         {
-            string petJson;
-
             using (IDal dal = new ProtoDBContext())
             {
                 var data = dal.GetPets().ToList();
@@ -54,11 +52,10 @@ namespace Zealous.Domain
 
                     pets.Add(petModel);
                 }
-
-                petJson = JsonConvert.SerializeObject(pets);
+                return pets;
             }
 
-            return petJson;
+            return null;
         }
 
         public bool AddPet(IPet pet)
@@ -73,7 +70,7 @@ namespace Zealous.Domain
             }
         }
 
-        public bool UpdatePet(IPet pet)
+        public IModel UpdatePet(IPet pet)
         {
             using (IDal dal = new ProtoDBContext())
             {
@@ -81,9 +78,8 @@ namespace Zealous.Domain
 
                 var dbModel = mapper.Map(pet as IModel);
 
-                throw new NotImplementedException();
+                return new PetModel();
             }
         }
-
     }
 }

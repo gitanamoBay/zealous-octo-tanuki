@@ -1,49 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Zealous.DAL;
 using Zealous.Interfaces;
 using Zealous.Mappers;
 using Zealous.Models;
-using Zealous.ProtoDAL;
 
 namespace Zealous.Domain
 {
     public class Users
     {
-        public string GetUser(Guid id)
+        public IModel GetUser(Guid id)
         {
-            string petJson;
-
             using (IDal dal = new ProtoDBContext())
             {
                 var data = dal.GetUserById(id);
 
                 var userModel = new ProtoUserMap(dal).Map(data as IDBModel) as UserModel;
 
-                var pets = new List<IModel>();
+                var pets = new List<IPet>();
 
                 var petmapper = new ProtoPetMap(dal);
 
                 foreach (var pet in userModel.Pets)
                 {
-                    pets.Add(petmapper.Map(pet as IDBModel));
+                    pets.Add(petmapper.Map(pet as IDBModel) as IPet);
                 }
 
-                petJson = JsonConvert.SerializeObject(new {
-                    userModel.Username,
-                    Pets = pets,
-                    userModel.ID
-                });
-            }
+                userModel.Pets = pets;
 
-            return petJson;
+                return userModel;
+            }
         }
 
-        public string GetUsers()
+        public List<IModel> GetUsers()
         {
             string petJson;
 
@@ -51,7 +41,7 @@ namespace Zealous.Domain
             {
                 var data = dal.GetUsers().ToList();
 
-                List<object> users = new List<object>();
+                var users = new List<IModel>();
 
                 var mapper = new ProtoUserMap(dal);
                 var petmapper = new ProtoPetMap(dal);
@@ -59,22 +49,18 @@ namespace Zealous.Domain
                 {
                     var userModel = mapper.Map(user as IDBModel) as UserModel;
 
-                    var pets = new List<IModel>();
+                    var pets = new List<IPet>();
 
                     foreach (var pet in userModel.Pets)
                     {
-                        pets.Add(petmapper.Map(pet as IDBModel));
+                        pets.Add(petmapper.Map(pet as IDBModel) as IPet);
                     }
-
-                    users.Add( new {userModel.Username,
-                        Pets = pets,
-                        userModel.ID});
+                    userModel.Pets = pets;
+                    users.Add(userModel);
                 }
 
-                petJson = JsonConvert.SerializeObject(users);
+                return users;
             }
-
-            return petJson;
         }
     }
 }

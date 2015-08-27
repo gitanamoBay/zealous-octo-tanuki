@@ -9,20 +9,31 @@ namespace Zealous.Controllers
 {
     public class UsersController : ApiController
     {
-        public string Get()
+        public IHttpActionResult Get()
         {
-            return new Zealous.Domain.Users().GetUsers();
+            return Ok(new Zealous.Domain.Users().GetUsers());
         }
 
-        public string Get(string id)
+        public IHttpActionResult Get(string id)
         {
             Guid guid = Guid.Empty;
-            if(Guid.TryParse(id, out guid))
-                return new Zealous.Domain.Users().GetUser(guid);
-
-            return new HttpError("User not found.").ToString();
+            if (Guid.TryParse(id, out guid))
+            {
+                var user = new Zealous.Domain.Users().GetUser(guid);
+                if (user == null)
+                    return NotFound();
+                return Ok(user);
+            }
+            return BadRequest();
         }
-
+        public IHttpActionResult GetUserPets(Guid userId)
+        {
+            return Ok();
+        }
+        public IHttpActionResult GetUserPets(Guid userId,Guid petId)
+        {
+            return Ok();
+        }
 
     }
 }

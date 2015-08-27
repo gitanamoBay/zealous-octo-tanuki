@@ -13,20 +13,6 @@ namespace Zealous.Tests.Controllers
     [TestClass]
     public class ValuesControllerTest
     {
-        [TestMethod]
-        public void Get()
-        {
-            // Arrange
-            PetsController controller = new PetsController();
 
-            // Act
-            string result = controller.Get();
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("value1", result.ElementAt(0));
-            Assert.AreEqual("value2", result.ElementAt(1));
-        }
     }
 }

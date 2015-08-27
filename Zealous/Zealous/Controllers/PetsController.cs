@@ -1,27 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using Zealous.Models.Messages;
 
 namespace Zealous.Controllers
 {
     public class PetsController : ApiController
     {
-        public string Get()
+        public IHttpActionResult Get()
         {
-            return new Zealous.Domain.Pets().GetPets();
+            return Ok( new Domain.Pets().GetPets());
         }
 
-        public string Get(string id)
+        public IHttpActionResult Get(string id)
         {
             Guid guid = Guid.Empty;
-            if(Guid.TryParse(id, out guid))
-                return new Zealous.Domain.Pets().GetPets(guid);
+            if (Guid.TryParse(id, out guid))
+            {
+                var pets = new Zealous.Domain.Pets().GetPets(guid);
+                if(pets.Count() > 0)
+                    return Ok(pets);
 
-            return new HttpError("User not found.").ToString();
+                return NotFound();
+            }
+            return BadRequest();
         }
+
+        public IHttpActionResult UpdatePet(PetUpdateMessage message)
+        {
+            Guid guid = Guid.Empty;
+
+            return NotFound();
+        }
+
+
 
 
     }
