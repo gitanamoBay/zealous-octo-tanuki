@@ -28,13 +28,16 @@ namespace Zealous.Controllers
 
         public IHttpActionResult UpdatePet(PetUpdateMessage message)
         {
-            Guid guid = Guid.Empty;
+            var pets = new Zealous.Domain.Pets();
 
+            var model = pets.UpdatePet(message);
+
+            if (model != null)
+            {
+                return Ok(model);
+            }
+          
             return NotFound();
         }
-
-
-
-
     }
 }
