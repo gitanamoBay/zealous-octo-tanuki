@@ -5,8 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Zealous;
-using Zealous.Controllers;
 
 namespace Zealous.Tests.Controllers
 {

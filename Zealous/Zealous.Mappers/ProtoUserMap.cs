@@ -32,8 +32,6 @@ namespace Zealous.Mappers
             if (proto == null)
                 return null;
 
-
-
             return new UserModel
             {
                 ID = proto.ID,
