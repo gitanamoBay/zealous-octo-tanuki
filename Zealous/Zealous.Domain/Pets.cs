@@ -4,6 +4,7 @@ using System.Linq;
 using Zealous.DAL;
 using Zealous.Interfaces;
 using Newtonsoft.Json;
+using Zealous.Enums;
 using Zealous.Mappers;
 using Zealous.Models;
 using Zealous.Models.Messages;
@@ -75,9 +76,6 @@ namespace Zealous.Domain
         {
             using (IDal dal = new ProtoDBContext())
             {
-                //var mapper = new ProtoPetMap(dal);
-
-                // var dbModel = mapper.Map(pet as IModel);
                 var pet =
                     dal.GetPets().FirstOrDefault(x => x.ID == message.PetID && x.OwnerID == message.UserID) as
                         ProtoPetModel;
@@ -86,16 +84,10 @@ namespace Zealous.Domain
                 {
                     return null;
                 }
-                //calculate hours away;
+
                 var now = DateTime.Now;
-                now.AddYears(-2000);
-                var seconds = now.Second + now.Minute*60 + now.Hour*360 + now.DayOfYear*1440 + now.Year*525949;
 
-                var pseconds = pet.LastChangeDate.Second + pet.LastChangeDate.Minute*60 + pet.LastChangeDate.Hour*360
-                               + pet.LastChangeDate.DayOfYear*1440 + pet.LastChangeDate.Year*525949;
-                var delta = seconds - pseconds;
-
-                //TimeSpan t = TimeSpan.FromSeconds(delta);
+                var delta = (float) ((now - pet.LastChangeDate).TotalSeconds);
 
                 float happinessReduction = pet.HappinessDecay*delta;
                 float hungerReduction = pet.HungerDecay*delta;
@@ -104,17 +96,69 @@ namespace Zealous.Domain
                 {
                     pet.Happiness = 0;
                 }
+                else
+                {
+                    pet.Happiness = pet.Happiness - happinessReduction;
+                }
 
                 if (hungerReduction > pet.Hunger)
                 {
                     pet.Hunger = 0;
                 }
+                else
+                {
+                    pet.Hunger = pet.Hunger - hungerReduction;
+                }
 
 
+                pet.LastChangeDate = now;
+                switch (pet.Type)
+                {
+                    case PetType.Aloof:
+                        if (message.UpdateActions.HasFlag(PetActions.Feed))
+                        {
 
+                        }
+                        if (message.UpdateActions.HasFlag(PetActions.Pet))
+                        {
 
+                        }
+                        break;
+                    case PetType.Needy:
+                        if (message.UpdateActions.HasFlag(PetActions.Feed))
+                        {
 
-            return new PetModel();
+                        }
+                        if (message.UpdateActions.HasFlag(PetActions.Pet))
+                        {
+
+                        }
+                        break;
+                    case PetType.Big:
+                        if (message.UpdateActions.HasFlag(PetActions.Feed))
+                        {
+
+                        }
+                        if (message.UpdateActions.HasFlag(PetActions.Pet))
+                        {
+
+                        }
+                        break;
+                    case PetType.Small:
+                        if (message.UpdateActions.HasFlag(PetActions.Feed))
+                        {
+
+                        }
+                        if (message.UpdateActions.HasFlag(PetActions.Pet))
+                        {
+
+                        }
+                        break;
+                }
+
+                dal.UpdatePet(pet);
+
+                return new ProtoPetMap(dal).Map(pet);
             }
         }
     }

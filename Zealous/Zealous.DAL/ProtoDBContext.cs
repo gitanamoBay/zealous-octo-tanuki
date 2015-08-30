@@ -55,6 +55,11 @@ namespace Zealous.DAL
             return new ProtoDBCollections().AddUser(user);
         }
 
+        public bool UpdatePet(IPet pet)
+        {
+            return new ProtoDBCollections().UpdatePet(pet);
+        }
+
         public void Dispose()
         {
         }
