@@ -90,68 +90,55 @@ namespace Zealous.Domain
                 var delta = (float) ((now - pet.LastChangeDate).TotalSeconds);
 
                 float happinessReduction = pet.HappinessDecay*delta;
-                float hungerReduction = pet.HungerDecay*delta;
+                float hungerIncrease = pet.HungerDecay*delta;
 
-                if (happinessReduction > pet.Happiness)
-                {
-                    pet.Happiness = 0;
-                }
-                else
-                {
-                    pet.Happiness = pet.Happiness - happinessReduction;
-                }
-
-                if (hungerReduction > pet.Hunger)
-                {
-                    pet.Hunger = 0;
-                }
-                else
-                {
-                    pet.Hunger = pet.Hunger - hungerReduction;
-                }
-
-
+                //floats clamp
+                pet.Happiness = pet.Happiness - happinessReduction;
+                pet.Hunger = pet.Hunger + hungerIncrease;
                 pet.LastChangeDate = now;
+
+                //hacky implementation, going to seperate this in to seperate updaters so they can be a bit more interesting. 
                 switch (pet.Type)
                 {
                     case PetType.Aloof:
                         if (message.UpdateActions.HasFlag(PetActions.Feed))
                         {
-
+                            pet.Hunger -= 100;
                         }
                         if (message.UpdateActions.HasFlag(PetActions.Pet))
-                        {
-
+                        { 
+                            pet.Happiness += 20;
                         }
                         break;
                     case PetType.Needy:
                         if (message.UpdateActions.HasFlag(PetActions.Feed))
                         {
-
+                            pet.Hunger -= 80;
                         }
                         if (message.UpdateActions.HasFlag(PetActions.Pet))
                         {
-
+                            pet.Happiness += 200;
                         }
                         break;
                     case PetType.Big:
                         if (message.UpdateActions.HasFlag(PetActions.Feed))
                         {
-
+                            pet.Hunger -= 20;
+                            pet.Happiness += 50;
                         }
                         if (message.UpdateActions.HasFlag(PetActions.Pet))
                         {
-
+                            pet.Happiness += 50;
                         }
                         break;
                     case PetType.Small:
                         if (message.UpdateActions.HasFlag(PetActions.Feed))
                         {
-
+                            pet.Hunger -= 500;
                         }
                         if (message.UpdateActions.HasFlag(PetActions.Pet))
                         {
-
+                            pet.Happiness += 50;
                         }
                         break;
                 }
