@@ -22,9 +22,9 @@ namespace Zealous.ProtoDAL
                 switch (Type)
                 {
                      case  PetType.Needy:
-                        return 100;
-                     case PetType.Aloof:
                         return 10;
+                     case PetType.Aloof:
+                        return 1;
                     default:
                         return 50;
                 }
@@ -40,11 +40,11 @@ namespace Zealous.ProtoDAL
                 switch (Type)
                 {
                     case PetType.Big:
-                        return 100;
-                    case PetType.Small:
                         return 10;
+                    case PetType.Small:
+                        return 1;
                     default:
-                        return 50;
+                        return 5;
                 }
             }
             set { throw new Exception("cannot set value"); }
@@ -56,8 +56,6 @@ namespace Zealous.ProtoDAL
             Happiness = newValues.Happiness;
             Hunger = newValues.Hunger;
             LastChangeDate = newValues.LastChangeDate;
-            HappinessDecay = newValues.HappinessDecay;
-            HungerDecay = newValues.HungerDecay;
         }
     }
 }

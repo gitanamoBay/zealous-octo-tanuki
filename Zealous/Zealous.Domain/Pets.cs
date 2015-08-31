@@ -103,42 +103,42 @@ namespace Zealous.Domain
                     case PetType.Aloof:
                         if (message.UpdateActions.HasFlag(PetActions.Feed))
                         {
-                            pet.Hunger -= 100;
+                            pet.Hunger -= 1000;
                         }
                         if (message.UpdateActions.HasFlag(PetActions.Pet))
                         { 
-                            pet.Happiness += 20;
+                            pet.Happiness += 200;
                         }
                         break;
                     case PetType.Needy:
                         if (message.UpdateActions.HasFlag(PetActions.Feed))
                         {
-                            pet.Hunger -= 80;
+                            pet.Hunger -= 800;
                         }
                         if (message.UpdateActions.HasFlag(PetActions.Pet))
                         {
-                            pet.Happiness += 200;
+                            pet.Happiness += 2000;
                         }
                         break;
                     case PetType.Big:
                         if (message.UpdateActions.HasFlag(PetActions.Feed))
                         {
-                            pet.Hunger -= 20;
-                            pet.Happiness += 50;
+                            pet.Hunger -= 200;
+                            pet.Happiness += 500;
                         }
                         if (message.UpdateActions.HasFlag(PetActions.Pet))
                         {
-                            pet.Happiness += 50;
+                            pet.Happiness += 500;
                         }
                         break;
                     case PetType.Small:
                         if (message.UpdateActions.HasFlag(PetActions.Feed))
                         {
-                            pet.Hunger -= 500;
+                            pet.Hunger -= 5000;
                         }
                         if (message.UpdateActions.HasFlag(PetActions.Pet))
                         {
-                            pet.Happiness += 50;
+                            pet.Happiness += 500;
                         }
                         break;
                 }
