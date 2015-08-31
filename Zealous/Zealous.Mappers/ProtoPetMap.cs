@@ -1,4 +1,5 @@
-﻿using Zealous.Interfaces;
+﻿using System;
+using Zealous.Interfaces;
 using Zealous.Models;
 using Zealous.ProtoDAL;
 
@@ -32,13 +33,24 @@ namespace Zealous.Mappers
             if (proto == null)
                 return null;
 
+            var now = DateTime.Now;
+
+            var delta = (float)((now - proto.LastChangeDate).TotalSeconds);
+
+            float happinessReduction = proto.HappinessDecay * delta;
+            float hungerIncrease = proto.HungerDecay * delta;
+
+            //floats clamp
+            var happiness = proto.Happiness - happinessReduction;
+            var hunger = proto.Hunger + hungerIncrease;
+
             return new PetModel
             {
                 Name = proto.Name,
                 ID = proto.ID,
                 OwnerID = proto.OwnerID,
-                Happiness =  proto.Happiness,
-                Hunger = proto.Hunger,
+                Happiness = happiness,
+                Hunger = hunger,
                 Type = proto.Type,
                 LastChangeDate = proto.LastChangeDate,
                 HappinessDecay = proto.HappinessDecay,
@@ -62,8 +74,6 @@ namespace Zealous.Mappers
                 Hunger = petModel.Hunger,
                 Type = petModel.Type,
                 LastChangeDate = petModel.LastChangeDate,
-                HappinessDecay = petModel.HappinessDecay,
-                HungerDecay = petModel.HungerDecay
             };
         }
     }

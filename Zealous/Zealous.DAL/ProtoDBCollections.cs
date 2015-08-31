@@ -114,7 +114,7 @@ namespace Zealous.DAL
         static ProtoDBCollections()
         {
             petList = new List<ProtoPetModel>();
-            petList.Add(new ProtoPetModel{ ID = Guid.Empty,Happiness = 10,HappinessDecay =  20, Hunger = 100,HungerDecay = 100,LastChangeDate = DateTime.Now,Name ="ya",OwnerID = Guid.Empty,Type = PetType.Aloof});
+            petList.Add(new ProtoPetModel{ ID = Guid.Empty,LastChangeDate = DateTime.Now,Name ="ya",OwnerID = Guid.Empty,Type = PetType.Aloof});
             userList = new List<ProtoUserModel>();
             userList.Add(new ProtoUserModel(null) { ID = Guid.Empty,Password = "this",Username = "grant"});
 
