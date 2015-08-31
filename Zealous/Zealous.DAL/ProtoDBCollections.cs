@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using Zealous.Enums;
 using Zealous.Interfaces;
 using Zealous.ProtoDAL;
@@ -13,6 +15,7 @@ namespace Zealous.DAL
         static List<ProtoUserModel> userList;
         private static object petLock;
         private static object userLock;
+        private const string path = @"C:\Users\grant\Desktop\Zealous";
 
         public IEnumerable<IPet> Pets
         {
@@ -46,6 +49,7 @@ namespace Zealous.DAL
             lock (petLock)
             {
                 petList.Add(dbModel);
+                storePets();
             }
             return true;
         }
@@ -60,6 +64,7 @@ namespace Zealous.DAL
             lock (userLock)
             {
                 userList.Add(dbModel);
+                storeUsers();
             }
 
             return true;
@@ -83,7 +88,7 @@ namespace Zealous.DAL
 
 
                 existingModel.CopyMutableValues(dbModel);
-               
+               storePets();
 
                 return true;
             }
@@ -106,17 +111,42 @@ namespace Zealous.DAL
                 }
 
                 existingModel.CopyMutableValues(dbModel);
+                storeUsers();
 
                 return true;
             }
         }
 
+        static void storePets()
+        {
+            File.WriteAllText(path+@"\pets.json",JsonConvert.SerializeObject(petList));
+        }
+
+        static void storeUsers()
+        {
+            File.WriteAllText(path + @"\users.json", JsonConvert.SerializeObject(userList));
+        }
+
+
+
         static ProtoDBCollections()
         {
-            petList = new List<ProtoPetModel>();
-            petList.Add(new ProtoPetModel{ ID = Guid.Empty,LastChangeDate = DateTime.Now,Name ="ya",OwnerID = Guid.Empty,Type = PetType.Aloof});
-            userList = new List<ProtoUserModel>();
-            userList.Add(new ProtoUserModel(null) { ID = Guid.Empty,Password = "this",Username = "grant"});
+            if (Directory.Exists(path))
+            {
+                petList = JsonConvert.DeserializeObject< List<ProtoPetModel>>(File.ReadAllText(path + @"\pets.json"));
+                userList = JsonConvert.DeserializeObject<List<ProtoUserModel>>(File.ReadAllText(path + @"\users.json"));
+            }
+            else
+            {
+                petList = new List<ProtoPetModel>();
+                petList.Add(new ProtoPetModel { ID = Guid.Empty, LastChangeDate = DateTime.Now, Name = "ya", OwnerID = Guid.Empty, Type = PetType.Aloof });
+                userList = new List<ProtoUserModel>();
+                userList.Add(new ProtoUserModel(null) { ID = Guid.Empty, Password = "this", Username = "grant" });
+
+                Directory.CreateDirectory(path);
+                storePets();
+                storeUsers();
+            }
 
             petLock = new object();
             userLock = new object();
