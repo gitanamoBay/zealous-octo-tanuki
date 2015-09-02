@@ -62,5 +62,21 @@ namespace Zealous.Domain
                 return users;
             }
         }
+
+        public bool Authenticate(string username, string password)
+        {
+            using (IDal dal = new ProtoDBContext())
+            {
+                var user = dal.GetUserByName(username);
+
+                if (user == null)
+                    return false;
+
+                if (user.Password != password)
+                    return false;
+            }
+            return true;
+        }
+
     }
 }

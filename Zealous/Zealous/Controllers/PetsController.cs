@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Http;
+using Zealous.Filters;
 using Zealous.Models.Messages;
 
 namespace Zealous.Controllers
@@ -26,8 +27,10 @@ namespace Zealous.Controllers
             return BadRequest();
         }
 
+        [GenericAuth]
         public IHttpActionResult UpdatePet(PetUpdateMessage message)
         {
+
             var pets = new Zealous.Domain.Pets();
 
             var model = pets.UpdatePet(message);
