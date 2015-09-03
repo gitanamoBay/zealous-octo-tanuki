@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Zealous.DAL;
 using Zealous.Interfaces;
 using Zealous.Mappers;
 using Zealous.Models;
-
+using Zealous.Models.Messages;
 namespace Zealous.Domain
 {
     public class Users
@@ -62,6 +63,27 @@ namespace Zealous.Domain
                 return users;
             }
         }
+
+        public bool? AddPet(AddPetMessage message)
+        {
+            using (IDal dal = new ProtoDBContext())
+            {
+                var user = dal.GetUserByName(Thread.CurrentPrincipal.Identity.Name);
+
+                if (user == null)
+                    return null;
+
+                if (user.ID != message.UserId)
+                    return null;
+                var petmapper = new ProtoPetMap(dal);
+
+                
+
+                return dal.AddPet(petmapper.Map(message.Model as IModel) as IPet);
+            }
+        }
+
+
 
         public bool Authenticate(string username, string password)
         {

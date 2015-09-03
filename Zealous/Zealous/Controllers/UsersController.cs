@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Zealous.Filters;
+using Zealous.Models.Messages;
 
 namespace Zealous.Controllers
 {
@@ -34,6 +36,22 @@ namespace Zealous.Controllers
         {
             return Ok();
         }
+
+        [GenericAuth]
+        public IHttpActionResult AddPetToUser(AddPetMessage message)
+        {
+            var users = new Zealous.Domain.Users();
+            var result = users.AddPet(message);
+
+            if (!result.HasValue)
+                return Unauthorized();
+
+            if(!result.Value)
+                return Conflict();
+
+            return Ok();
+        }
+
 
     }
 }
