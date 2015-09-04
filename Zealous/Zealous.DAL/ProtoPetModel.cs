@@ -1,35 +1,28 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Zealous.Interfaces;
 using Zealous.Enums;
+using Zealous.Interfaces;
 
 namespace Zealous.ProtoDAL
 {
-    public class ProtoPetModel:IPet,IDBModel
+    public class ProtoPetModel : IPet, IDBModel
     {
-        public IDal Dal { get; set; }
-        public Guid ID { get; set; }
-        public Guid OwnerID { get; set; }
-        public string Name { get; set; }
-        public float Happiness { get; set; }
-        public float Hunger { get; set; }
-        public PetType Type { get; set; }
-        public DateTime LastChangeDate { get; set; }
-
         [JsonIgnore]
-        public float HappinessDecay {
-            get {
+        public float HappinessDecay
+        {
+            get
+            {
                 switch (Type)
                 {
-                     case  PetType.Needy:
+                    case PetType.Needy:
                         return 10;
-                     case PetType.Aloof:
+                    case PetType.Aloof:
                         return 1;
                     default:
                         return 50;
                 }
             }
-            set {throw new Exception("cannot set value");}
+            set { throw new Exception("cannot set value"); }
         }
 
         [JsonIgnore]
@@ -49,6 +42,15 @@ namespace Zealous.ProtoDAL
             }
             set { throw new Exception("cannot set value"); }
         }
+
+        public IDal Dal { get; set; }
+        public Guid ID { get; set; }
+        public Guid OwnerID { get; set; }
+        public string Name { get; set; }
+        public float Happiness { get; set; }
+        public float Hunger { get; set; }
+        public PetType Type { get; set; }
+        public DateTime LastChangeDate { get; set; }
 
         public void CopyMutableValues(ProtoPetModel newValues)
         {

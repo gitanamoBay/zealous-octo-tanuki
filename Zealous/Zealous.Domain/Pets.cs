@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Zealous.DAL;
-using Zealous.Interfaces;
-using Newtonsoft.Json;
 using Zealous.Enums;
+using Zealous.Interfaces;
 using Zealous.Mappers;
-using Zealous.Models;
 using Zealous.Models.Messages;
 using Zealous.ProtoDAL;
 
@@ -16,12 +14,11 @@ namespace Zealous.Domain
     {
         public IEnumerable<IModel> GetPets(Guid id)
         {
-
             using (IDal dal = new ProtoDBContext())
             {
                 var data = dal.GetPetsByUserId(id).ToList();
 
-                List<IModel> pets = new List<IModel>();
+                var pets = new List<IModel>();
 
                 var mapper = new ProtoPetMap(dal);
 
@@ -34,8 +31,6 @@ namespace Zealous.Domain
 
                 return pets;
             }
-
-            return null;
         }
 
         public IEnumerable<IModel> GetPets()
@@ -44,7 +39,7 @@ namespace Zealous.Domain
             {
                 var data = dal.GetPets().ToList();
 
-                List<IModel> pets = new List<IModel>();
+                var pets = new List<IModel>();
 
                 var mapper = new ProtoPetMap(dal);
 
@@ -56,8 +51,6 @@ namespace Zealous.Domain
                 }
                 return pets;
             }
-
-            return null;
         }
 
         public bool AddPet(IPet pet)
@@ -89,8 +82,8 @@ namespace Zealous.Domain
 
                 var delta = (float) ((now - pet.LastChangeDate).TotalSeconds);
 
-                float happinessReduction = pet.HappinessDecay*delta;
-                float hungerIncrease = pet.HungerDecay*delta;
+                var happinessReduction = pet.HappinessDecay*delta;
+                var hungerIncrease = pet.HungerDecay*delta;
 
                 //floats clamp
                 pet.Happiness = pet.Happiness - happinessReduction;
@@ -106,7 +99,7 @@ namespace Zealous.Domain
                             pet.Hunger -= 1000;
                         }
                         if (message.UpdateActions.HasFlag(PetActions.Pet))
-                        { 
+                        {
                             pet.Happiness += 200;
                         }
                         break;

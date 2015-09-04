@@ -9,13 +9,43 @@ using Zealous.ProtoDAL;
 
 namespace Zealous.DAL
 {
-    public class ProtoDBCollections:IDBSet
+    public class ProtoDBCollections : IDBSet
     {
-        static List<ProtoPetModel> petList;
-        static List<ProtoUserModel> userList;
-        private static object petLock;
-        private static object userLock;
         private const string path = @"C:\Users\grant\Desktop\Zealous";
+        private static readonly List<ProtoPetModel> petList;
+        private static readonly List<ProtoUserModel> userList;
+        private static readonly object petLock;
+        private static readonly object userLock;
+
+        static ProtoDBCollections()
+        {
+            if (Directory.Exists(path))
+            {
+                petList = JsonConvert.DeserializeObject<List<ProtoPetModel>>(File.ReadAllText(path + @"\pets.json"));
+                userList = JsonConvert.DeserializeObject<List<ProtoUserModel>>(File.ReadAllText(path + @"\users.json"));
+            }
+            else
+            {
+                petList = new List<ProtoPetModel>();
+                petList.Add(new ProtoPetModel
+                {
+                    ID = Guid.Empty,
+                    LastChangeDate = DateTime.Now,
+                    Name = "ya",
+                    OwnerID = Guid.Empty,
+                    Type = PetType.Aloof
+                });
+                userList = new List<ProtoUserModel>();
+                userList.Add(new ProtoUserModel(null) {ID = Guid.Empty, Password = "this", Username = "grant"});
+
+                Directory.CreateDirectory(path);
+                storePets();
+                storeUsers();
+            }
+
+            petLock = new object();
+            userLock = new object();
+        }
 
         public IEnumerable<IPet> Pets
         {
@@ -88,7 +118,7 @@ namespace Zealous.DAL
 
 
                 existingModel.CopyMutableValues(dbModel);
-               storePets();
+                storePets();
 
                 return true;
             }
@@ -117,40 +147,14 @@ namespace Zealous.DAL
             }
         }
 
-        static void storePets()
+        private static void storePets()
         {
-            File.WriteAllText(path+@"\pets.json",JsonConvert.SerializeObject(petList));
+            File.WriteAllText(path + @"\pets.json", JsonConvert.SerializeObject(petList));
         }
 
-        static void storeUsers()
+        private static void storeUsers()
         {
             File.WriteAllText(path + @"\users.json", JsonConvert.SerializeObject(userList));
         }
-
-
-
-        static ProtoDBCollections()
-        {
-            if (Directory.Exists(path))
-            {
-                petList = JsonConvert.DeserializeObject< List<ProtoPetModel>>(File.ReadAllText(path + @"\pets.json"));
-                userList = JsonConvert.DeserializeObject<List<ProtoUserModel>>(File.ReadAllText(path + @"\users.json"));
-            }
-            else
-            {
-                petList = new List<ProtoPetModel>();
-                petList.Add(new ProtoPetModel { ID = Guid.Empty, LastChangeDate = DateTime.Now, Name = "ya", OwnerID = Guid.Empty, Type = PetType.Aloof });
-                userList = new List<ProtoUserModel>();
-                userList.Add(new ProtoUserModel(null) { ID = Guid.Empty, Password = "this", Username = "grant" });
-
-                Directory.CreateDirectory(path);
-                storePets();
-                storeUsers();
-            }
-
-            petLock = new object();
-            userLock = new object();
-        }
-
     }
 }

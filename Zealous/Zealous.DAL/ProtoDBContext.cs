@@ -7,7 +7,6 @@ namespace Zealous.DAL
 {
     public class ProtoDBContext : IDal
     {
-
         public IEnumerable<IPet> GetPets()
         {
             return new ProtoDBCollections().Pets;
@@ -15,7 +14,7 @@ namespace Zealous.DAL
 
         public IEnumerable<IPet> GetPetsByUserId(Guid ownerId)
         {
-            return new ProtoDBCollections().Pets.Where(x=>x.OwnerID == ownerId);
+            return new ProtoDBCollections().Pets.Where(x => x.OwnerID == ownerId);
         }
 
         public IEnumerable<IPet> GetPetsByUsername(string username)
@@ -23,11 +22,11 @@ namespace Zealous.DAL
             var collections = new ProtoDBCollections();
 
             var user = collections.Users.SingleOrDefault(x => x.Username == username);
-            
+
             if (user == null)
                 return null;
 
-            return collections.Pets.Where(x=> x.OwnerID == user.ID);
+            return collections.Pets.Where(x => x.OwnerID == user.ID);
         }
 
         public IEnumerable<IUser> GetUsers()
@@ -37,7 +36,7 @@ namespace Zealous.DAL
 
         public IUser GetUserById(Guid id)
         {
-            return GetUsers().SingleOrDefault(x=>x.ID == id);
+            return GetUsers().SingleOrDefault(x => x.ID == id);
         }
 
         public IUser GetUserByName(string username)
@@ -50,11 +49,6 @@ namespace Zealous.DAL
             return new ProtoDBCollections().AddPet(pet);
         }
 
-        public bool AddUser(IUser user)
-        {
-            return new ProtoDBCollections().AddUser(user);
-        }
-
         public bool UpdatePet(IPet pet)
         {
             return new ProtoDBCollections().UpdatePet(pet);
@@ -62,6 +56,11 @@ namespace Zealous.DAL
 
         public void Dispose()
         {
+        }
+
+        public bool AddUser(IUser user)
+        {
+            return new ProtoDBCollections().AddUser(user);
         }
     }
 }

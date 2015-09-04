@@ -7,6 +7,7 @@ using Zealous.Interfaces;
 using Zealous.Mappers;
 using Zealous.Models;
 using Zealous.Models.Messages;
+
 namespace Zealous.Domain
 {
     public class Users
@@ -36,8 +37,6 @@ namespace Zealous.Domain
 
         public List<IModel> GetUsers()
         {
-            string petJson;
-
             using (IDal dal = new ProtoDBContext())
             {
                 var data = dal.GetUsers().ToList();
@@ -77,13 +76,10 @@ namespace Zealous.Domain
                     return null;
                 var petmapper = new ProtoPetMap(dal);
 
-                
 
-                return dal.AddPet(petmapper.Map(message.Model as IModel) as IPet);
+                return dal.AddPet(petmapper.Map(message.Model) as IPet);
             }
         }
-
-
 
         public bool Authenticate(string username, string password)
         {
@@ -99,6 +95,5 @@ namespace Zealous.Domain
             }
             return true;
         }
-
     }
 }

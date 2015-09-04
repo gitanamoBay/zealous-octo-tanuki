@@ -6,7 +6,7 @@ using Zealous.Interfaces;
 
 namespace Zealous.Models
 {
-    public class UserModel:IUser,IModel
+    public class UserModel : IUser, IModel
     {
         public Guid ID { get; set; }
         public string Username { get; set; }

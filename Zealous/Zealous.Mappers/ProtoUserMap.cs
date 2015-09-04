@@ -35,7 +35,7 @@ namespace Zealous.Mappers
             return new UserModel
             {
                 ID = proto.ID,
-                Username =  proto.Username,
+                Username = proto.Username,
                 Password = proto.Password,
                 Pets = proto.Pets
             };

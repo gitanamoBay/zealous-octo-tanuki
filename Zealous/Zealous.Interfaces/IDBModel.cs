@@ -1,5 +1,4 @@
-﻿
-namespace Zealous.Interfaces
+﻿namespace Zealous.Interfaces
 {
     public interface IDBModel
     {

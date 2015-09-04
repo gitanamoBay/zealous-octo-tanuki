@@ -6,11 +6,11 @@ using Zealous.Interfaces;
 
 namespace Zealous.ProtoDAL
 {
-    public class ProtoUserModel:IUser,IDBModel
+    public class ProtoUserModel : IUser, IDBModel
     {
         public ProtoUserModel(IDal dB)
         {
-            Dal = dB;  
+            Dal = dB;
         }
 
         public IDal Dal { get; set; }
@@ -22,7 +22,7 @@ namespace Zealous.ProtoDAL
         public List<IPet> Pets
         {
             get { return Dal.GetPetsByUserId(ID).ToList(); }
-            set {  }
+            set { }
         }
 
         public void CopyMutableValues(ProtoUserModel model)

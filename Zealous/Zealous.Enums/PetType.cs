@@ -2,6 +2,9 @@ namespace Zealous.Enums
 {
     public enum PetType
     {
-        Big,Small,Needy,Aloof
+        Big,
+        Small,
+        Needy,
+        Aloof
     }
 }

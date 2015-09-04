@@ -35,10 +35,10 @@ namespace Zealous.Mappers
 
             var now = DateTime.Now;
 
-            var delta = (float)((now - proto.LastChangeDate).TotalSeconds);
+            var delta = (float) ((now - proto.LastChangeDate).TotalSeconds);
 
-            float happinessReduction = proto.HappinessDecay * delta;
-            float hungerIncrease = proto.HungerDecay * delta;
+            var happinessReduction = proto.HappinessDecay*delta;
+            var hungerIncrease = proto.HungerDecay*delta;
 
             //floats clamp
             var happiness = proto.Happiness - happinessReduction;
@@ -73,7 +73,7 @@ namespace Zealous.Mappers
                 Happiness = petModel.Happiness,
                 Hunger = petModel.Hunger,
                 Type = petModel.Type,
-                LastChangeDate = petModel.LastChangeDate,
+                LastChangeDate = petModel.LastChangeDate
             };
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Zealous.Interfaces
 {
-    public interface IDal:IDisposable
+    public interface IDal : IDisposable
     {
         IEnumerable<IPet> GetPets();
         IEnumerable<IPet> GetPetsByUserId(Guid ownerId);
@@ -12,8 +12,6 @@ namespace Zealous.Interfaces
         IUser GetUserById(Guid id);
         IUser GetUserByName(string username);
         bool UpdatePet(IPet pet);
-
-
         bool AddPet(IPet pet);
     }
 }
